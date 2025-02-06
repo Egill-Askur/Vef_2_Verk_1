@@ -71,7 +71,7 @@ async function writeHtml(data) {
 
     //const htmlContent = '<html><h1>halló heimur!!!</h1></html>';
 
-    fs.writeFile(htmlFilePath, htmlContent, 'utf-8');
+    await fs.writeFile(htmlFilePath, htmlContent, 'utf-8');
 }
 
 /**
@@ -218,8 +218,6 @@ async function validateJson(data) {
 
 }
 
-
-
 /**
  * Keyrir forritið okkar:
  * 1. Sækir gögn
@@ -228,7 +226,7 @@ async function validateJson(data) {
  */
 async function main() {
     //Generate dummy site
-    fs.writeFile('./dist/index.html', '', 'utf-8')
+    //await fs.writeFile('./dist/index.html', '', 'utf-8')
     
     const indexJson = await readJson(INDEX_PATH);
     const indexData = parseIndexJson(indexJson);
