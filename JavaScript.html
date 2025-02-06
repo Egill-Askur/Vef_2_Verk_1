@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>JavaScript Quiz</title>
+            <style>
+                body { font-family: Arial, sans-serif; padding: 20px; }
+                h1 { color: #333; }
+                .question { margin-bottom: 20px; }
+                .answers { list-style-type: none; padding: 0; }
+                .answers li { margin: 5px 0; }
+            </style>
+        </head>
+        <body>
+            <h1>JavaScript Quiz</h1>
+            <div id="quiz"><div class='question' id="question-0">
+            <h2>Q1: Hvað er skrifað út eftir að eftirfarandi kóði er keyrður?
+
+const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+const іtem = items
+  .map((i) => i * 2)
+  .filter(
+    (i) => i < 10
+  )
+  .find((i) => i > 6)
+
+
+console.log(item);</h2>
+            <ul class='answers'><li>
+                    <label>
+                        <input type="radio" name="question-0" value="0" data-correct="true">
+                        8
+                    </label>
+                </li><li>
+                    <label>
+                        <input type="radio" name="question-0" value="1" data-correct="false">
+                        [8]
+                    </label>
+                </li><li>
+                    <label>
+                        <input type="radio" name="question-0" value="2" data-correct="false">
+                        Uncaught ReferenceError: item is not defined
+                    </label>
+                </li><li>
+                    <label>
+                        <input type="radio" name="question-0" value="3" data-correct="false">
+                        undefined
+                    </label>
+                </li></ul>
+                <button onclick="checkAnswer(0)">Submit</button>
+                <p class="feedback" id="feedback-0"></p>
+            </div><div class='question' id="question-1">
+            <h2>Q2: Þegar við berum saman gildi í JavaScript ættum við alltaf að nota þrjú samasem merki (`===`) því að</h2>
+            <ul class='answers'><li>
+                    <label>
+                        <input type="radio" name="question-1" value="0" data-correct="true">
+                        Þessi samanburður byrjar á að bera saman týpur gilda og kemst því framhjá type coercion sem gerist með samanburð með tveimur samasem merkjum.
+                    </label>
+                </li><li>
+                    <label>
+                        <input type="radio" name="question-1" value="1" data-correct="false">
+                        Við ættum alltaf að nota tvö samasem merki, ekki þrjú því þá byrjum við á að bera saman týpur gilda og komumst þannig framhjá type coercion.
+                    </label>
+                </li><li>
+                    <label>
+                        <input type="radio" name="question-1" value="2" data-correct="false">
+                        Þessi samanburður kemst framhjá truthy og falsy gildum og skilar eingöngu réttum niðurstöðum fyrir primitive gildi.
+                    </label>
+                </li><li>
+                    <label>
+                        <input type="radio" name="question-1" value="3" data-correct="false">
+                        Þessi samanburður nýtir lógíska virkja sem virka aðeins í tvístæðum.
+                    </label>
+                </li></ul>
+                <button onclick="checkAnswer(1)">Submit</button>
+                <p class="feedback" id="feedback-1"></p>
+            </div><div class='question' id="question-2">
+            <h2>Q3: Þegar við notum `fetch` í JavaScript ætti ferlið við að sækja gögn að vera</h2>
+            <ul class='answers'><li>
+                    <label>
+                        <input type="radio" name="question-2" value="0" data-correct="true">
+                        Búið til `fetch` request kall sem tilgreinir að minnsta kosti URL; villuathugun á kalli og svari með tilliti til HTTP; gögn sótt í response með villuathugun.
+                    </label>
+                </li><li>
+                    <label>
+                        <input type="radio" name="question-2" value="1" data-correct="false">
+                        Búið til `fetch` request kall sem verður að tilgreina URL, HTTP aðferð og stöðukóða; villuathugun á kalli og svari með tilliti til HTTP; gögn sótt í response með villuathugun.
+                    </label>
+                </li><li>
+                    <label>
+                        <input type="radio" name="question-2" value="2" data-correct="false">
+                        Búið til `fetch` request kall sem tilgreinir að minnsta kosti URL; villuathugun á kalli og svari með tilliti til URL; gögn sótt í response.
+                    </label>
+                </li><li>
+                    <label>
+                        <input type="radio" name="question-2" value="3" data-correct="false">
+                        Búið til `fetch` request kall sem tilgreinir að minnsta kosti URL; villuathugun á kalli og svari með tilliti til HTTP; eingöngu JSON gögn sótt í response með villuathugun.
+                    </label>
+                </li><li>
+                    <label>
+                        <input type="radio" name="question-2" value="4" data-correct="undefined">
+                        undefined
+                    </label>
+                </li></ul>
+                <button onclick="checkAnswer(2)">Submit</button>
+                <p class="feedback" id="feedback-2"></p>
+            </div></div>
+
+            <script>
+                function checkAnswer(questionIndex) {
+                    const selectedOption = document.querySelector(`input[name="question-${questionIndex}"]:checked`);
+                    const feedbackElement = document.getElementById(`feedback-${questionIndex}`);
+                    
+                    if (!selectedOption) {
+                        feedbackElement.textContent = "Please select an answer!";
+                        feedbackElement.className = "feedback incorrect";
+                        return;
+                    }
+                    
+                    const isCorrect = selectedOption.getAttribute("data-correct") === "true";
+                    
+                    if (isCorrect) {
+                        feedbackElement.textContent = "✅ Correct!";
+                        feedbackElement.className = "feedback correct";
+                    } else {
+                        feedbackElement.textContent = "❌ Incorrect!";
+                        feedbackElement.className = "feedback incorrect";
+                    }
+                }
+            </script>
+
+            <a href="./dist/index.html">Back to main page</a>
+
+        </body>
+        </html>

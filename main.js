@@ -39,11 +39,21 @@ async function readJson(filePath) {
 async function writeHtml(data) {
     const htmlFilePath = 'dist/index.html';
 
+    console.log("Validating json files")
+
     let html = '';
 
-    for (const item of data) {
-        html += `<li>${item.title}</li>\n`
-    }
+    const htmlItems = await Promise.all(
+        data.map(async (item) => {
+            if (await validateJson(item)) {
+                generateHTMLFile(item);
+                return `<li><a href="../${item.title}.html">${item.title}</a></li>\n`;
+            }
+            return '';
+        })
+    );
+
+    html = htmlItems.join('');
 
     const htmlContent = `
     <!doctype html>
@@ -79,6 +89,137 @@ function parseIndexJson(data) {
 }
 
 
+async function generateHTMLFile(data) {
+    console.log("generateHTMLFile data:", data)
+
+    const newFile = await fs.readFile(`./data/${data.file}`, 'utf-8')
+    const jsonData = JSON.parse(newFile);
+    
+    console.log("jsonData read and parsed:", jsonData);
+
+    let htmlContent = `<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>${data.title} Quiz</title>
+            <style>
+                body { font-family: Arial, sans-serif; padding: 20px; }
+                h1 { color: #333; }
+                .question { margin-bottom: 20px; }
+                .answers { list-style-type: none; padding: 0; }
+                .answers li { margin: 5px 0; }
+            </style>
+        </head>
+        <body>
+            <h1>${data.title} Quiz</h1>
+            <div id="quiz">`;
+
+            jsonData.questions.forEach((q, index) => {
+                if (!Array.isArray(q.answers)) {
+                    console.warn(`Skipping question ${index + 1}: answers is not an array`, q);
+                    return; // Skip invalid questions
+                }
+
+            htmlContent += `<div class='question' id="question-${index}">
+            <h2>Q${index + 1}: ${q.question}</h2>
+            <ul class='answers'>`;
+
+            q.answers.forEach((answer, ansIndex) => {
+                htmlContent += `<li>
+                    <label>
+                        <input type="radio" name="question-${index}" value="${ansIndex}" data-correct="${answer.correct}">
+                        ${answer.answer}
+                    </label>
+                </li>`;
+            });
+
+            htmlContent += `</ul>
+                <button onclick="checkAnswer(${index})">Submit</button>
+                <p class="feedback" id="feedback-${index}"></p>
+            </div>`;
+        });
+
+        htmlContent += `</div>
+
+            <script>
+                function checkAnswer(questionIndex) {
+                    const selectedOption = document.querySelector(\`input[name="question-\${questionIndex}"]:checked\`);
+                    const feedbackElement = document.getElementById(\`feedback-\${questionIndex}\`);
+                    
+                    if (!selectedOption) {
+                        feedbackElement.textContent = "Please select an answer!";
+                        feedbackElement.className = "feedback incorrect";
+                        return;
+                    }
+                    
+                    const isCorrect = selectedOption.getAttribute("data-correct") === "true";
+                    
+                    if (isCorrect) {
+                        feedbackElement.textContent = "✅ Correct!";
+                        feedbackElement.className = "feedback correct";
+                    } else {
+                        feedbackElement.textContent = "❌ Incorrect!";
+                        feedbackElement.className = "feedback incorrect";
+                    }
+                }
+            </script>
+
+            <a href="./dist/index.html">Back to main page</a>
+
+        </body>
+        </html>`;
+    // Write to an HTML file
+    await fs.writeFile(`${data.title}.html`, htmlContent) 
+    console.log(`${data.title}.html has been created successfully`);
+}
+    /*
+    const html = '';
+    for (const i of data.questions) {
+        html += ``
+    }
+    const htmlContent = `
+    <!doctype html>
+    <html>
+        <head>
+            <title>${item.title}</title>
+        </head>
+        <body>
+            <ul>
+                ${html}
+            </ul>
+        </body>
+    </html>
+    `;
+    
+    //const newHtmlFile = fs.writeFile(`${item.title}.html`, item.questions, 'utf-8');
+}
+*/
+
+
+/**
+ * Skoðar hvort Json skrá er á réttu formi
+ * @param {any} data JSON skrá sem á að skoða
+ * @returns {Promise<boolean>} Er skráin í lagi að nota
+ */
+async function validateJson(data) {
+    console.log("Getting JSON file for validation", data);
+    const filePath = `./data/${data.file}`;
+    const fileData = await readJson(filePath);
+    console.log(fileData != null);
+    if (fileData != null) {
+        console.log(data, "seems okay");
+        console.log("Are the questions null?", fileData.questions == null);
+        if (fileData.questions != null) return true;
+    }
+    console.log(data, "is a problem");
+    return false;
+
+
+}
+
+
+
 /**
  * Keyrir forritið okkar:
  * 1. Sækir gögn
@@ -91,7 +232,7 @@ async function main() {
 
     writeHtml(indexData)
 
-    console.log(indexData);
+    //console.log(indexData);
 
     /*
     const allData = await Promise.all(

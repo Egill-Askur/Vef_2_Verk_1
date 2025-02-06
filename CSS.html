@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>CSS Quiz</title>
+            <style>
+                body { font-family: Arial, sans-serif; padding: 20px; }
+                h1 { color: #333; }
+                .question { margin-bottom: 20px; }
+                .answers { list-style-type: none; padding: 0; }
+                .answers li { margin: 5px 0; }
+            </style>
+        </head>
+        <body>
+            <h1>CSS Quiz</h1>
+            <div id="quiz"><div class='question' id="question-0">
+            <h2>Q1: Fyrir eftirfarandi HTML / for the following HTML:
+
+
+<div class="text">
+  <h1 class="important text__title">Halló heimur</p>
+</div>
+ 
+
+Er skilgreint CSS / there is defined CSS:
+
+
+.text {
+  font-size: 10px;
+  color: green;
+}
+
+.text .text__title {
+  font-size: 1.5em;
+}
+
+.important {
+  font-size: 2em;
+  color: red;
+}
+
+ 
+
+Hvert af eftirfarandi er satt fyrir textann „Halló heimur“ eftir að búið er að reikna gildi?</h2>
+            <ul class='answers'><li>
+                    <label>
+                        <input type="radio" name="question-0" value="0" data-correct="true">
+                        font-size: 20px;, color: green;
+                    </label>
+                </li><li>
+                    <label>
+                        <input type="radio" name="question-0" value="1" data-correct="false">
+                        font-size: 15px;, color: red;
+                    </label>
+                </li><li>
+                    <label>
+                        <input type="radio" name="question-0" value="2" data-correct="false">
+                        font-size: 20px;, color: red;
+                    </label>
+                </li><li>
+                    <label>
+                        <input type="radio" name="question-0" value="3" data-correct="false">
+                        font-size: 15px;, color: green;
+                    </label>
+                </li></ul>
+                <button onclick="checkAnswer(0)">Submit</button>
+                <p class="feedback" id="feedback-0"></p>
+            </div><div class='question' id="question-1">
+            <h2>Q2: Ef við erum að nota nýtt gildi fyrir lit í CSS sem er ekki víst að sé stutt í öllum vöfrum, þá ættum við að</h2>
+            <ul class='answers'><li>
+                    <label>
+                        <input type="radio" name="question-1" value="0" data-correct="true">
+                        Skilgreina fallback gildi á undan nýja gildinu sem væri notað í stað þess ef það er ekki stutt
+                    </label>
+                </li><li>
+                    <label>
+                        <input type="radio" name="question-1" value="1" data-correct="false">
+                        Skilgreina fallback gildi á eftir nýja gildinu sem væri notað í stað þess ef það er ekki stutt.
+                    </label>
+                </li><li>
+                    <label>
+                        <input type="radio" name="question-1" value="2" data-correct="false">
+                        Setja upp JavaScript virkni sem bendir notanda á að sækja nýjann vafra sem styður gildið.
+                    </label>
+                </li><li>
+                    <label>
+                        <input type="radio" name="question-1" value="3" data-correct="false">
+                        Þetta er ekki stutt í CSS.
+                    </label>
+                </li></ul>
+                <button onclick="checkAnswer(1)">Submit</button>
+                <p class="feedback" id="feedback-1"></p>
+            </div><div class='question' id="question-2">
+            <h2>Q3: Í verkefnum höfum við unnið með „containers“ og „items“ sem hugtök, hvað á það við?</h2>
+            <ul class='answers'><li>
+                    <label>
+                        <input type="radio" name="question-2" value="0" data-correct="true">
+                        „Flex container“ og „flex items; „grid container“ og „grid items“: greinarmunur á foreldri og börnum þegar flexbox og CSS grid er notað.
+                    </label>
+                </li><li>
+                    <label>
+                        <input type="radio" name="question-2" value="1" data-correct="false">
+                        „Flex container“ og „flex items: greinarmunur á foreldri og börnum eingngu þegar flexbox er notað.
+                    </label>
+                </li><li>
+                    <label>
+                        <input type="radio" name="question-2" value="2" data-correct="false">
+                        „Grid container“ og „grid items“: greinarmunur á foreldri og börnum eingöngu þegar grid er notað.
+                    </label>
+                </li><li>
+                    <label>
+                        <input type="radio" name="question-2" value="3" data-correct="false">
+                        Hugtök sem eru notuð með `querySelectorAll`: „container“ er það element sem leitað er undir, „items“ það sem er skilað.
+                    </label>
+                </li></ul>
+                <button onclick="checkAnswer(2)">Submit</button>
+                <p class="feedback" id="feedback-2"></p>
+            </div><div class='question' id="question-3">
+            <h2>Q4: Þegar við notum flexbox hvað af eftirfarandi er satt? Gerið ráð fyrir að skjal sé lesið frá vinstri til hægri.</h2>
+            <ul class='answers'><li>
+                    <label>
+                        <input type="radio" name="question-3" value="0" data-correct="true">
+                        Höfum skilgreinda tvo ása: aðalás og krossás sem eru hornréttir; sjálfgefin röðun er á aðalás frá vinstri til hægri.
+                    </label>
+                </li><li>
+                    <label>
+                        <input type="radio" name="question-3" value="1" data-correct="false">
+                        Höfum skilgreinda tvo ása: aðalás og krossás sem eru samsíða; sjálfgefin röðun er á aðalás frá vinstri til hægri.
+                    </label>
+                </li><li>
+                    <label>
+                        <input type="radio" name="question-3" value="2" data-correct="false">
+                        Höfum skilgreinda tvo ása: aðalás og krossás sem eru hornréttir; sjálfgefin röðun er á krossás frá vinstri til hægri.
+                    </label>
+                </li><li>
+                    <label>
+                        <input type="radio" name="question-3" value="3" data-correct="false">
+                        Höfum skilgreinda tvo ása: aðalás og krossás sem eru samsíða; sjálfgefin röðun er á krossás frá vinstri til hægri.
+                    </label>
+                </li></ul>
+                <button onclick="checkAnswer(3)">Submit</button>
+                <p class="feedback" id="feedback-3"></p>
+            </div></div>
+
+            <script>
+                function checkAnswer(questionIndex) {
+                    const selectedOption = document.querySelector(`input[name="question-${questionIndex}"]:checked`);
+                    const feedbackElement = document.getElementById(`feedback-${questionIndex}`);
+                    
+                    if (!selectedOption) {
+                        feedbackElement.textContent = "Please select an answer!";
+                        feedbackElement.className = "feedback incorrect";
+                        return;
+                    }
+                    
+                    const isCorrect = selectedOption.getAttribute("data-correct") === "true";
+                    
+                    if (isCorrect) {
+                        feedbackElement.textContent = "✅ Correct!";
+                        feedbackElement.className = "feedback correct";
+                    } else {
+                        feedbackElement.textContent = "❌ Incorrect!";
+                        feedbackElement.className = "feedback incorrect";
+                    }
+                }
+            </script>
+
+            <a href="./dist/index.html">Back to main page</a>
+
+        </body>
+        </html>
