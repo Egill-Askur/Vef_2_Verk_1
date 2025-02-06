@@ -95,7 +95,7 @@ async function generateHTMLFile(data) {
     const newFile = await fs.readFile(`./data/${data.file}`, 'utf-8')
     const jsonData = JSON.parse(newFile);
     
-    console.log("jsonData read and parsed:", jsonData);
+    //console.log("jsonData read and parsed:", jsonData);
 
     let htmlContent = `<!DOCTYPE html>
     <html lang="en">
@@ -205,14 +205,20 @@ async function generateHTMLFile(data) {
 async function validateJson(data) {
     console.log("Getting JSON file for validation", data);
     const filePath = `./data/${data.file}`;
-    const fileData = await readJson(filePath);
-    console.log(fileData != null);
-    if (fileData != null) {
+    try {
+        const fileData = await readJson(filePath);
+        console.log(fileData != null);
+        if (fileData != null) {
         console.log(data, "seems okay");
         console.log("Are the questions null?", fileData.questions == null);
         if (fileData.questions != null) return true;
     }
-    console.log(data, "is a problem");
+    }
+    catch (error)
+    {
+        console.log(data, "is a problem");
+    }
+    
     return false;
 
 
