@@ -227,6 +227,8 @@ async function validateJson(data) {
  * 3. Skrifar út HTML
  */
 async function main() {
+    //Generate dummy site
+    fs.writeFile('./dist/index.html', '', 'utf-8')
     
     const indexJson = await readJson(INDEX_PATH);
     const indexData = parseIndexJson(indexJson);
