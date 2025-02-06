@@ -165,12 +165,12 @@ async function generateHTMLFile(data) {
                 }
             </script>
 
-            <a href="./dist/index.html">Back to main page</a>
+            <a href="./index.html">Back to main page</a>
 
         </body>
         </html>`;
     // Write to an HTML file
-    await fs.writeFile(path.resolve(`.${data.title}.html`), htmlContent) 
+    await fs.writeFile(`.${data.title}.html`, htmlContent) 
     console.log(`${data.title}.html has been created successfully`);
 }
     /*
