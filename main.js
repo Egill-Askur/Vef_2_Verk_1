@@ -37,7 +37,7 @@ async function readJson(filePath) {
  * @returns {Promise<void>}
  */
 async function writeHtml(data) {
-    const htmlFilePath = 'dist/index.html';
+    const htmlFilePath = './dist/index.html';
 
     console.log("Validating json files")
 
@@ -47,7 +47,7 @@ async function writeHtml(data) {
         data.map(async (item) => {
             if (await validateJson(item)) {
                 generateHTMLFile(item);
-                return `<li><a href="../${item.title}.html">${item.title}</a></li>\n`;
+                return `<li><a href="./${item.title}.html">${item.title}</a></li>\n`;
             }
             return '';
         })
@@ -227,6 +227,7 @@ async function validateJson(data) {
  * 3. Skrifar út HTML
  */
 async function main() {
+    
     const indexJson = await readJson(INDEX_PATH);
     const indexData = parseIndexJson(indexJson);
 
