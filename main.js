@@ -206,12 +206,15 @@ async function validateJson(data) {
     console.log("Getting JSON file for validation", data);
     const filePath = `./data/${data.file}`;
     try {
-        const fileData = await readJson(filePath);
-        console.log(fileData != null);
-        if (fileData != null) {
-        console.log(data, "seems okay");
-        console.log("Are the questions null?", fileData.questions == null);
-        if (fileData.questions != null) return true;
+        if (await checkFile(filePath)) {
+            const fileData = await readJson(filePath);
+            console.log(fileData != null);
+            if (fileData != null) {
+            console.log(data, "seems okay");
+            console.log("Are the questions null?", fileData.questions == null);
+            if (fileData.questions != null) return true;
+        }
+        
     }
     }
     catch (error)
@@ -223,6 +226,18 @@ async function validateJson(data) {
 
 
 }
+
+async function checkFile(data) {
+    try {
+      await fs.access(data);
+      console.log(`File exists: ${data}`);
+      // Proceed with reading the file or other logic
+      return true;
+    } catch (err) {
+      console.log(`File does not exist: ${data}`);
+    }
+    return false;
+  }
 
 /**
  * Keyrir forritið okkar:
