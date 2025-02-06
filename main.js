@@ -170,7 +170,7 @@ async function generateHTMLFile(data) {
         </body>
         </html>`;
     // Write to an HTML file
-    await fs.writeFile(`./dist/${data.title}.html`, htmlContent) 
+    await fs.writeFile(path.resolve(`.${data.title}.html`), htmlContent) 
     console.log(`${data.title}.html has been created successfully`);
 }
     /*
