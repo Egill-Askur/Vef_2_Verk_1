@@ -1,6 +1,7 @@
 {
   "name": "vef2-2025-v1",
   "version": "1.0.0",
+  "type": "module",
   "description": "- Lausn á verkefni 1",
   "main": "index.js",
   "scripts": {
