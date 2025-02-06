@@ -92,7 +92,7 @@ function parseIndexJson(data) {
 async function generateHTMLFile(data) {
     console.log("generateHTMLFile data:", data)
 
-    const newFile = await fs.readFile(`./data/${data.file}`, 'utf-8')
+    const newFile = await fs.readFile(path.resolve(`./data/${data.file}`), 'utf-8')
     const jsonData = JSON.parse(newFile);
     
     //console.log("jsonData read and parsed:", jsonData);
